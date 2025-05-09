@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="StarScope - Red Carpet Celebrity Gossip" />
+<title>StarScope - Red Carpet</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet" />
+<style>
+  /* Reset & basic */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #1a1a1a;
+    padding: 1rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  header h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: #e91e63;
+    letter-spacing: 2px;
+  }
+  nav ul {
+    list-style: none;
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ccc;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover, nav ul li a.active {
+    color: #e91e63;
+  }
+  main {
+    flex-grow: 1;
+    padding: 1.5rem 1rem 3rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  section {
+    margin-top: 3rem;
+  }
+  section h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    color: #e91e63;
+    border-bottom: 2px solid #e91e63;
+    padding-bottom: 0.2rem;
+  }
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.8rem;
+  }
+  article {
+    background: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(233,30,99,0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(233,30,99,0.8);
+  }
+  article img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  article h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem;
+    color: white;
+    padding: 0.9rem 1rem;
+  }
+  article p {
+    padding: 0 1rem 1rem 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+    flex-grow: 1;
+  }
+  .btn-readmore {
+    background: #e91e63;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    padding: 0.7rem 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .btn-readmore:hover {
+    background: #c2185b;
+  }
+  footer {
+    background: #1a1a1a;
+    text-align: center;
+    padding: 1rem 1rem;
+    font-size: 0.8rem;
+    color: #777;
+    user-select: none;
+  }
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13,13,13,0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+    padding: 10px;
+  }
+  .modal.active {
+    display: flex;
+  }
+  .modal-content {
+    background: #222;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 8px 30px rgba(233,30,99,0.8);
+    position: relative;
+  }
+  .modal-content h3 {
+    font-family: 'Bebas Neue', cursive;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #e91e63;
+  }
+  .modal-content p {
+    font-size: 1rem;
+    color: #ddd;
+    line-height: 1.6;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 2rem;
+    color: #e91e63;
+    cursor: pointer;
+    user-select: none;
+  }
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+    nav ul {
+      gap: 1rem;
+    }
+    .btn-readmore {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>StarScope</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="trending.html">Trending</a></li>
+        <li><a href="redcarpet.html" class="active" aria-current="page">Red Carpet</a></li>
+        <li><a href="exclusives.html">Exclusives</a></li>
+        <li><a href="#contact-section">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-label="Red Carpet Gossip Articles">
+      <h2>Red Carpet</h2>
+      <div class="articles">
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2015/09/09/22/33/woman-933282_1280.jpg" alt="Elegant celebrity in a gown" />
+          <h3>Star Stuns in Designer Gown at Gala</h3>
+          <p>The red carpet lit up as a famous actress wowed fans with an exquisite gown that combined classic elegance with modern flair.</p>
+          <button class="btn-readmore" data-article="rarticle1">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2016/11/21/15/50/woman-1840315_1280.jpg" alt="Actor posing for photographers" />
+          <h3>Actor Wows Crowd with Sleek Look</h3>
+          <p>A leading actor turned heads with a stylish and sleek outfit, blending timeless fashion with contemporary edge.</p>
+          <button class="btn-readmore" data-article="rarticle2">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2017/01/05/09/55/model-1953017_1280.jpg" alt="Model showcasing new fashion" />
+          <h3>Model Debuts Bold Red Carpet Look</h3>
+          <p>A rising star caught attention with a bold and innovative style, challenging traditional fashion norms on the red carpet.</p>
+          <button class="btn-readmore" data-article="rarticle3">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2017/07/15/12/37/catwalk-2508805_1280.jpg" alt="Glamorous entrance at event" />
+          <h3>Glamorous Entrance Turns Heads</h3>
+          <p>This year’s gala saw some unforgettable entrances, with celebrities showing confidence and charisma as they arrived.</p>
+          <button class="btn-readmore" data-article="rarticle4">Read More</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Modals for articles -->
+    <div id="rarticle1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="rarticle1-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="rarticle1-title">Star Stuns in Designer Gown at Gala</h3>
+        <p>The actress’ stunning gown was designed by a prestigious fashion house, incorporating intricate beadwork and a flowing silhouette that dazzled photographers and fans alike.</p>
+      </div>
+    </div>
+
+    <div id="rarticle2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="rarticle2-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="rarticle2-title">Actor Wows Crowd with Sleek Look</h3>
+        <p>The actor’s tailored suit featured subtle details that elevated the entire outfit, blending classic styles with a modern touch, earning praise from fashion critics.</p>
+      </div>
+    </div>
+
+    <div id="rarticle3" class="modal" aria-hidden="true" role="dialog" aria-labelledby="rarticle3-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="rarticle3-title">Model Debuts Bold Red Carpet Look</h3>
+        <p>Challenging traditional norms, the model’s daring outfit showcased vibrant colors and unique textures, making a striking impression on fashion observers.</p>
+      </div>
+    </div>
+
+    <div id="rarticle4" class="modal" aria-hidden="true" role="dialog" aria-labelledby="rarticle4-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="rarticle4-title">Glamorous Entrance Turns Heads</h3>
+        <p>Several memorable entrances defined the event, with celebrities combining style and personality, captivating the attention of the media and fans alike.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 StarScope. All rights reserved.
+  </footer>
+
+<script>
+  // Modal open/close logic for redcarpet page
+  const buttons = document.querySelectorAll('.btn-readmore');
+  const modals = document.querySelectorAll('.modal');
+  const closeButtons = document.querySelectorAll('.close-btn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-article');
+      const modal = document.getElementById(id);
+      if(modal){
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        modal.querySelector('.close-btn').focus();
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal){
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if(e.key === "Escape"){
+      modals.forEach(modal => {
+        if(modal.classList.contains('active')){
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
