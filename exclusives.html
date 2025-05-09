@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="StarScope - Exclusive Celebrity Gossip" />
+<title>StarScope - Exclusives</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet" />
+<style>
+  /* Reset & basic */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #1a1a1a;
+    padding: 1rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  header h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: #e91e63;
+    letter-spacing: 2px;
+  }
+  nav ul {
+    list-style: none;
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ccc;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover, nav ul li a.active {
+    color: #e91e63;
+  }
+  main {
+    flex-grow: 1;
+    padding: 1.5rem 1rem 3rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  section {
+    margin-top: 3rem;
+  }
+  section h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    color: #e91e63;
+    border-bottom: 2px solid #e91e63;
+    padding-bottom: 0.2rem;
+  }
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.8rem;
+  }
+  article {
+    background: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(233,30,99,0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(233,30,99,0.8);
+  }
+  article img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  article h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem;
+    color: white;
+    padding: 0.9rem 1rem;
+  }
+  article p {
+    padding: 0 1rem 1rem 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+    flex-grow: 1;
+  }
+  .btn-readmore {
+    background: #e91e63;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    padding: 0.7rem 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .btn-readmore:hover {
+    background: #c2185b;
+  }
+  footer {
+    background: #1a1a1a;
+    text-align: center;
+    padding: 1rem 1rem;
+    font-size: 0.8rem;
+    color: #777;
+    user-select: none;
+  }
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13,13,13,0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+    padding: 10px;
+  }
+  .modal.active {
+    display: flex;
+  }
+  .modal-content {
+    background: #222;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 8px 30px rgba(233,30,99,0.8);
+    position: relative;
+  }
+  .modal-content h3 {
+    font-family: 'Bebas Neue', cursive;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #e91e63;
+  }
+  .modal-content p {
+    font-size: 1rem;
+    color: #ddd;
+    line-height: 1.6;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 2rem;
+    color: #e91e63;
+    cursor: pointer;
+    user-select: none;
+  }
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+    nav ul {
+      gap: 1rem;
+    }
+    .btn-readmore {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>StarScope</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="trending.html">Trending</a></li>
+        <li><a href="redcarpet.html">Red Carpet</a></li>
+        <li><a href="exclusives.html" class="active" aria-current="page">Exclusives</a></li>
+        <li><a href="#contact-section">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-label="Exclusive Gossip Articles">
+      <h2>Exclusives</h2>
+      <div class="articles">
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2019/06/19/20/27/cinema-4287307_1280.jpg" alt="Film clapboard and camera" />
+          <h3>Exclusive Interview: Movie Star Shares Behind-the-Scenes Stories</h3>
+          <p>Get the inside scoop on upcoming projects, personal anecdotes, and what really goes on behind the scenes in Hollywood's hot sets.</p>
+          <button class="btn-readmore" data-article="earticle1">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2018/07/11/13/58/cinema-3527634_1280.jpg" alt="Celebrity couple holding hands" />
+          <h3>Exclusive: Celebrity Couple’s Private Retreat Details Revealed</h3>
+          <p>An intimate look at a getaway that the media hasn’t seen until now, shedding light on the couple’s relationship away from the spotlight.</p>
+          <button class="btn-readmore" data-article="earticle2">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2016/03/27/22/23/cinema-1284789_1280.jpg" alt="Film director behind camera" />
+          <h3>Inside Scoop: Director Shares Challenges of Latest Film</h3>
+          <p>An in-depth conversation about creative hurdles, casting surprises, and how the director brought a unique vision to life.</p>
+          <button class="btn-readmore" data-article="earticle3">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2020/08/08/16/18/cinema-5479326_1280.jpg" alt="Award trophy on stage" />
+          <h3>Exclusive Coverage: Award Season Predictions and Buzz</h3>
+          <p>Industry insiders weigh in on potential winners, surprise nominations, and red carpet expectations for the upcoming award season.</p>
+          <button class="btn-readmore" data-article="earticle4">Read More</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Modals for articles -->
+    <div id="earticle1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="earticle1-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="earticle1-title">Exclusive Interview: Movie Star Shares Behind-the-Scenes Stories</h3>
+        <p>In a candid interview, the movie star discusses memorable moments on set, personal growth, and upcoming projects that fans can look forward to.</p>
+      </div>
+    </div>
+
+    <div id="earticle2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="earticle2-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="earticle2-title">Exclusive: Celebrity Couple’s Private Retreat Details Revealed</h3>
+        <p>The couple enjoyed a secluded retreat on a private island, away from paparazzi and public attention, sharing moments of relaxation and renewal.</p>
+      </div>
+    </div>
+
+    <div id="earticle3" class="modal" aria-hidden="true" role="dialog" aria-labelledby="earticle3-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="earticle3-title">Inside Scoop: Director Shares Challenges of Latest Film</h3>
+        <p>The director opens up about overcoming budget constraints, finding the perfect cast, and the unexpected twists during filming that shaped the final cut.</p>
+      </div>
+    </div>
+
+    <div id="earticle4" class="modal" aria-hidden="true" role="dialog" aria-labelledby="earticle4-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="earticle4-title">Exclusive Coverage: Award Season Predictions and Buzz</h3>
+        <p>Experts share insights on potential game changers this award season, the most talked-about films, and what to expect on the red carpet.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 StarScope. All rights reserved.
+  </footer>
+
+<script>
+  // Modal open/close logic for exclusives page
+  const buttons = document.querySelectorAll('.btn-readmore');
+  const modals = document.querySelectorAll('.modal');
+  const closeButtons = document.querySelectorAll('.close-btn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-article');
+      const modal = document.getElementById(id);
+      if(modal){
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        modal.querySelector('.close-btn').focus();
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal){
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if(e.key === "Escape"){
+      modals.forEach(modal => {
+        if(modal.classList.contains('active')){
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
