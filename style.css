@@ -1,115 +1,111 @@
+/* General Reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* Body Styling */
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #000;
-  color: #fff;
-  line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
 }
 
-/* Header */
+/* Header Styling */
 header {
-  background-color: #111;
-  text-align: center;
-  padding: 20px;
+    background-color: #111;
+    text-align: center;
+    padding: 20px;
 }
 
 header h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 3rem;
-  color: #e91e63;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: #e91e63;
 }
 
-/* Tabs */
-.tabs {
-  display: flex;
-  justify-content: center;
-  background-color: #333;
-  flex-wrap: wrap;
+/* Navigation Styling */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
 }
 
-.tablinks {
-  background: none;
-  border: none;
-  color: white;
-  padding: 14px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  text-transform: uppercase;
+nav ul li {
+    display: inline;
+    margin-right: 20px;
 }
 
-.tablinks:hover,
-.tablinks.active {
-  background-color: #e91e63;
-  color: white;
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Tab Content */
-.tabcontent {
-  display: none;
-  padding: 20px;
-  background-color: #1a1a1a;
-  border-top: 2px solid #e91e63;
+nav ul li a:hover {
+    color: #e91e63;
+}
+
+/* Main Content Styling */
+main {
+    padding: 20px;
+}
+
+.gossip-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .gossip-item {
-  background-color: #222;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .gossip-item img {
-  width: 100%;
-  height: auto;
-  border-bottom: 4px solid #e91e63;
+    width: 100%;
+    height: auto;
+    border-bottom: 4px solid #e91e63;
 }
 
-.gossip-item h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  margin: 10px;
-  color: #fff;
+.gossip-item h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    margin: 10px;
+    color: #fff;
 }
 
 .gossip-item p {
-  margin: 10px;
-  color: #ccc;
+    margin: 10px;
+    color: #ccc;
 }
 
-.gossip-item a,
-.read-more-btn {
-  display: block;
-  text-align: center;
-  background-color: #e91e63;
-  color: #fff;
-  padding: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 10px;
-  border: none;
-  cursor: pointer;
+.gossip-item a {
+    display: block;
+    text-align: center;
+    background-color: #e91e63;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-.gossip-item a:hover,
-.read-more-btn:hover {
-  background-color: #c2185b;
+.gossip-item a:hover {
+    background-color: #c2185b;
 }
 
-.more-text {
-  display: none;
-}
-
+/* Footer Styling */
 footer {
-  background-color: #111;
-  text-align: center;
-  padding: 20px;
-  color: #aaa;
+    background-color: #111;
+    text-align: center;
+    padding: 10px;
+    color: #fff;
 }
