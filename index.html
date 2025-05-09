@@ -1,72 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="StarScope - Your VIP Pass to Celebrity Gossip" />
-  <title>StarScope</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="StarScope - Your VIP Pass to Celebrity Gossip" />
+<title>StarScope - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet" />
+<style>
+  /* Reset & basic */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #1a1a1a;
+    padding: 1rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  header h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: #e91e63;
+    letter-spacing: 2px;
+  }
+  nav ul {
+    list-style: none;
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ccc;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover, nav ul li a.active {
+    color: #e91e63;
+  }
+  main {
+    flex-grow: 1;
+    padding: 1.5rem 1rem 3rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  section {
+    margin-top: 3rem;
+  }
+  section h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    color: #e91e63;
+    border-bottom: 2px solid #e91e63;
+    padding-bottom: 0.2rem;
+  }
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.8rem;
+  }
+  article {
+    background: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(233,30,99,0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(233,30,99,0.8);
+  }
+  article img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  article h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem;
+    color: white;
+    padding: 0.9rem 1rem;
+  }
+  article p {
+    padding: 0 1rem 1rem 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+    flex-grow: 1;
+  }
+  .btn-readmore {
+    background: #e91e63;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    padding: 0.7rem 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .btn-readmore:hover {
+    background: #c2185b;
+  }
+  footer {
+    background: #1a1a1a;
+    text-align: center;
+    padding: 1rem 1rem;
+    font-size: 0.8rem;
+    color: #777;
+    user-select: none;
+  }
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13,13,13,0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+    padding: 10px;
+  }
+  .modal.active {
+    display: flex;
+  }
+  .modal-content {
+    background: #222;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 8px 30px rgba(233,30,99,0.8);
+    position: relative;
+  }
+  .modal-content h3 {
+    font-family: 'Bebas Neue', cursive;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #e91e63;
+  }
+  .modal-content p {
+    font-size: 1rem;
+    color: #ddd;
+    line-height: 1.6;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 2rem;
+    color: #e91e63;
+    cursor: pointer;
+    user-select: none;
+  }
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+    nav ul {
+      gap: 1rem;
+    }
+    .btn-readmore {
+      font-size: 0.8rem;
+    }
+  }
+</style>
 </head>
 <body>
   <header>
     <h1>StarScope</h1>
     <nav>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#trending">Trending</a></li>
-        <li><a href="#red-carpet">Red Carpet</a></li>
-        <li><a href="#exclusives">Exclusives</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="trending.html">Trending</a></li>
+        <li><a href="redcarpet.html">Red Carpet</a></li>
+        <li><a href="exclusives.html">Exclusives</a></li>
+        <li><a href="#contact-section">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <!-- Trending Section -->
-    <section id="trending" class="gossip-grid">
-      <h2>Trending</h2>
-
-      <!-- Article 1 -->
-      <article class="gossip-item">
-        <img src="https://nypost.com/wp-content/uploads/sites/2/2024/03/rachel-zegler-timothee-chalamet.jpg?quality=75&strip=all" alt="Rachel Zegler and Timothée Chalamet">
-        <h3>Rachel Zegler Throws Shade at Timothée Chalamet Fans</h3>
-        <p>
-          At the 70th David Di Donatello Awards in Rome, Rachel Zegler playfully teased Timothée Chalamet fans after he and Kylie Jenner made their red carpet debut. The moment blew up online when fan account "Club Chalamet" fired back.
-        </p>
-        <button class="read-more" onclick="showArticle('article1')">Read more...</button>
-      </article>
-
-      <!-- Article 2 -->
-      <article class="gossip-item">
-        <img src="https://media.glamourmagazine.co.uk/photos/64f720a433fd04be7f9dc834/master/pass/Emily-Osment-Hero-SEP23-credit-GettyImages.jpg" alt="Emily Osment">
-        <h3>Emily Osment Splits from Husband Just Before 33rd Birthday</h3>
-        <p>
-          Former "Hannah Montana" star Emily Osment has filed for divorce from husband Jack Anthony just days before turning 33. Sources say it's mutual, but fans are stunned — and speculating about her next career move.
-        </p>
-        <button class="read-more" onclick="showArticle('article2')">Read more...</button>
-      </article>
-
-      <!-- Article 3 -->
-      <article class="gossip-item">
-        <img src="https://www.thebeat925.ca/media-library/ed-westwick-and-amy-jackson.jpg?id=35534446&width=980" alt="Ed Westwick and Amy Jackson baby">
-        <h3>Ed Westwick & Amy Jackson Welcome Baby Boy Oscar</h3>
-        <p>
-          Gossip Girl’s bad boy is now a dad! Ed Westwick and Amy Jackson have welcomed their first child together. They named him Oscar Alexander and shared a sweet pic on Instagram that melted hearts everywhere.
-        </p>
-        <button class="read-more" onclick="showArticle('article3')">Read more...</button>
-      </article>
-
-      <!-- Add more articles for Trending -->
-
+    <section aria-label="Featured Gossip Articles">
+      <h2>Featured Articles</h2>
+      <div class="articles">
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/man-1868819_1280.jpg" alt="Celebrity couple smiling" />
+          <h3>New Celebrity Couple Takes Hollywood by Storm</h3>
+          <p>Hollywood is abuzz with the news of an unexpected celebrity couple making headlines after their surprise public appearance last week.</p>
+          <button class="btn-readmore" data-article="article1">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2018/03/26/14/46/party-3265801_1280.jpg" alt="Glamorous red carpet event" />
+          <h3>Glamorous Red Carpet Event Stuns Fans</h3>
+          <p>The latest awards gala brought out the stars, featuring breathtaking dresses and memorable moments that fans won’t soon forget.</p>
+          <button class="btn-readmore" data-article="article2">Read More</button>
+        </article>
+        <article>
+          <img src="https://cdn.pixabay.com/photo/2019/12/19/22/56/man-4708113_1280.jpg" alt="Actor prepares for new role" />
+          <h3>Actor Prepares for a Challenging New Role</h3>
+          <p>In-depth look at how a prominent actor is pushing his limits with a demanding part in an upcoming blockbuster movie.</p>
+          <button class="btn-readmore" data-article="article3">Read More</button>
+        </article>
+      </div>
     </section>
 
-    <div id="article1" class="modal">
+    <!-- Modals -->
+    <div id="article1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="article1-title" tabindex="-1">
       <div class="modal-content">
-        <span class="close" onclick="closeModal('article1')">&times;</span>
-        <h3>Rachel Zegler Throws Shade at Timothée Chalamet Fans</h3>
-        <p>At the 70th David Di Donatello Awards in Rome, Rachel Zegler playfully teased Timothée Chalamet fans after he and Kylie Jenner made their red carpet debut. The moment blew up online when fan account "Club Chalamet" fired back.</p>
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="article1-title">New Celebrity Couple Takes Hollywood by Storm</h3>
+        <p>Hollywood is abuzz with the news of an unexpected celebrity couple who have taken the entertainment world by storm. After months of speculation, they've finally made their relationship public, appearing hand-in-hand at a major event last weekend. Fans have shown overwhelming support.</p>
       </div>
     </div>
 
-    <div id="article2" class="modal">
-      <div class
+    <div id="article2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="article2-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="article2-title">Glamorous Red Carpet Event Stuns Fans</h3>
+        <p>The annual glamour awards captured the hearts of viewers worldwide. Dazzling designer gowns, emotional acceptance speeches, and unexpected celebrity appearances made this a red carpet event to remember for years to come.</p>
+      </div>
+    </div>
+
+    <div id="article3" class="modal" aria-hidden="true" role="dialog" aria-labelledby="article3-title" tabindex="-1">
+      <div class="modal-content">
+        <span class="close-btn" aria-label="Close modal" role="button" tabindex="0">&times;</span>
+        <h3 id="article3-title">Actor Prepares for a Challenging New Role</h3>
+        <p>In this exclusive feature, we explore how one of Hollywood’s most versatile actors is preparing for a demanding role that will showcase his range and dedication. From intense workouts to method acting, he’s truly committed to his craft.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 StarScope. All rights reserved.
+  </footer>
+
+<script>
+  // Modal open/close logic
+  const buttons = document.querySelectorAll('.btn-readmore');
+  const modals = document.querySelectorAll('.modal');
+  const closeButtons = document.querySelectorAll('.close-btn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-article');
+      const modal = document.getElementById(id);
+      if(modal){
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        modal.querySelector('.close-btn').focus();
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // close modal on outside click
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal){
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // accessibility: close modal on ESC key
+  window.addEventListener('keydown', (e) => {
+    if(e.key === "Escape"){
+      modals.forEach(modal => {
+        if(modal.classList.contains('active')){
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
+
