@@ -1,30 +1,36 @@
-/* Basic Styles for the Blog */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
     line-height: 1.6;
-    background-color: #f4f4f4;
 }
 
+/* Header Styling */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-color: #111;
     text-align: center;
+    padding: 20px;
 }
 
 header h1 {
-    font-size: 2.5em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: #e91e63;
 }
 
+/* Navigation Styling */
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 20px 0;
 }
 
 nav ul li {
@@ -35,47 +41,70 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+    color: #e91e63;
 }
 
+/* Main Content Styling */
 main {
     padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
+}
+
+.gossip-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gossip-item {
+    background-color: #222;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.blog-posts article {
-    margin-bottom: 20px;
+.gossip-item img {
+    width: 100%;
+    height: auto;
+    border-bottom: 4px solid #e91e63;
 }
 
-.blog-posts h2 {
-    font-size: 2em;
-    color: #333;
-}
-
-.blog-posts .date {
-    font-size: 0.9em;
-    color: #888;
-}
-
-.blog-posts a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.blog-posts a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
+.gossip-item h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    margin: 10px;
     color: #fff;
 }
+
+.gossip-item p {
+    margin: 10px;
+    color: #ccc;
+}
+
+.gossip-item a {
+    display: block;
+    text-align: center;
+    background-color: #e91e63;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.gossip-item a:hover {
+    background-color: #c2185b;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #111;
+    text-align
+::contentReference[oaicite:3]{index=3}
+ 
